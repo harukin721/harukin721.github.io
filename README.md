@@ -2,4 +2,4 @@
 
 ## archive
 
-- [qiita](/qiita/archive.md)
+- [Qiita](/qiita/archive.md)
