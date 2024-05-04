@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haruki Uejima | Portfolio</title>
+  <meta name="description" content="Haruki Uejima — SRE / Platform Engineer. AWS, Kubernetes, Go, Terraform.">
+  <meta property="og:title" content="Haruki Uejima | Portfolio">
+  <meta property="og:description" content="SRE / Platform Engineer. AWS, Kubernetes, Go, Terraform.">
+  <meta property="og:url" content="https://harukiuejima.com">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://harukiuejima.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #08080c;
+      --bg-alt: #0c0c14;
+      --bg-card: #12121c;
+      --accent: #7c6aef;
+      --accent-glow: rgba(124, 106, 239, .22);
+      --mint: #2dd4a8;
+      --pink: #f472b6;
+      --amber: #f59e0b;
+      --text: #eaeaef;
+      --text-2: #9090a8;
+      --text-3: #606078;
+      --border: rgba(255, 255, 255, .06);
+      --radius: 16px;
+      --transition: .3s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic ProN',
+                   'Noto Sans JP', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.75; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--accent); color: #fff; }
+
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--mint); }
+
+    /* ════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(8, 8, 12, .78);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+    }
+    .nav.hide { transform: translateY(-100%); }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: .85rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 800; text-decoration: none;
+      background: linear-gradient(135deg, var(--accent), var(--mint));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a {
+      font-size: .82rem; font-weight: 500; color: var(--text-2);
+      text-decoration: none; letter-spacing: .02em; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* mobile nav */
+    .nav-toggle { display: none; background: none; border: none; color: var(--text-2); font-size: 1.3rem; cursor: pointer; }
+    @media (max-width: 700px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: fixed; top: 0; right: 0; bottom: 0; width: 220px;
+        flex-direction: column; gap: 0;
+        background: var(--bg-card); border-left: 1px solid var(--border);
+        padding: 5rem 1.5rem 2rem;
+        transform: translateX(100%); transition: transform .35s;
+        z-index: 1000;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a { font-size: 1rem; padding: .75rem 0; display: block; }
+      .nav-overlay {
+        position: fixed; inset: 0; background: rgba(0,0,0,.5);
+        z-index: 999; opacity: 0; pointer-events: none; transition: opacity .3s;
+      }
+      .nav-overlay.open { opacity: 1; pointer-events: auto; }
+    }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    .hero {
+      position: relative; min-height: 100vh; min-height: 100dvh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+    }
+    .hero-canvas { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(120px); opacity: .28;
+      animation: drift 10s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 520px; height: 520px; background: var(--accent); top: -15%; left: -8%; }
+    .orb-2 { width: 440px; height: 440px; background: var(--mint); bottom: -12%; right: -8%; animation-delay: 3s; }
+    .orb-3 { width: 320px; height: 320px; background: var(--pink); top: 45%; left: 55%; animation-delay: 6s; }
+    @keyframes drift { to { transform: translate(50px, -40px) scale(1.08); } }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, black 20%, transparent 70%);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+    .hero-label {
+      display: inline-block;
+      font-size: .78rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--mint); margin-bottom: 1.25rem;
+      opacity: 0; animation: fadeUp .8s .2s forwards;
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 7vw, 4.8rem); font-weight: 900;
+      line-height: 1.1; letter-spacing: -.025em;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 45%, var(--mint) 90%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      opacity: 0; animation: fadeUp .8s .4s forwards;
+    }
+    .hero-role {
+      font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--text-2);
+      margin-top: 1rem; opacity: 0; animation: fadeUp .8s .6s forwards;
+    }
+    .hero-keywords {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem;
+      margin-top: 1.5rem;
+      opacity: 0; animation: fadeUp .8s .8s forwards;
+    }
+    .hero-keywords span {
+      padding: .3rem .85rem; border-radius: 99px; font-size: .78rem; font-weight: 600;
+      background: rgba(124,106,239,.12); color: var(--accent); border: 1px solid rgba(124,106,239,.2);
+    }
+    .hero-cta {
+      margin-top: 2.5rem;
+      opacity: 0; animation: fadeUp .8s 1s forwards;
+    }
+    .hero-cta a {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 2rem; border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), #5b4fd4);
+      color: #fff; font-weight: 600; font-size: .92rem; text-decoration: none;
+      box-shadow: 0 4px 24px var(--accent-glow);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .hero-cta a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 36px var(--accent-glow);
+    }
+    .scroll-ind {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      z-index: 1; opacity: 0; animation: fadeUp .8s 1.3s forwards;
+    }
+    .scroll-ind span {
+      display: block; width: 20px; height: 32px;
+      border: 2px solid var(--text-3); border-radius: 99px; position: relative;
+    }
+    .scroll-ind span::after {
+      content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+      width: 3px; height: 8px; border-radius: 99px; background: var(--text-3);
+      animation: scrollDot 1.8s infinite;
+    }
+    @keyframes scrollDot {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════════════
+       SECTIONS
+    ════════════════════════════════════════ */
+    section { padding: 6.5rem 2rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .sec-head { margin-bottom: 3rem; }
+    .sec-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .4rem;
+    }
+    .sec-title { font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 800; }
+    .sec-line {
+      width: 48px; height: 3px; border-radius: 99px; margin-top: .7rem;
+      background: linear-gradient(90deg, var(--accent), var(--mint));
+    }
+
+    /* ════════════════════════════════════════
+       ABOUT
+    ════════════════════════════════════════ */
+    .about-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2.75rem;
+      position: relative; overflow: hidden;
+    }
+    .about-card::before {
+      content: ''; position: absolute; inset: -1px;
+      border-radius: var(--radius); padding: 1px;
+      background: linear-gradient(135deg, var(--accent), transparent 50%, var(--mint));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      pointer-events: none; opacity: .45;
+    }
+    .about-text { color: var(--text-2); font-size: 1.02rem; line-height: 2; }
+    .about-text p + p { margin-top: .75rem; }
+    .about-highlights {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-top: 2rem;
+    }
+    .about-highlights .hl {
+      background: rgba(124,106,239,.06); border: 1px solid rgba(124,106,239,.1);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .hl-num { font-size: 1.6rem; font-weight: 800; color: var(--accent); }
+    .hl-label { font-size: .78rem; color: var(--text-2); margin-top: .2rem; }
+
+    /* ════════════════════════════════════════
+       SKILLS
+    ════════════════════════════════════════ */
+    .skills-section { background: var(--bg-alt); }
+    .skill-category { margin-bottom: 2rem; }
+    .skill-category:last-child { margin-bottom: 0; }
+    .skill-cat-title {
+      font-size: .8rem; font-weight: 700; color: var(--text-2);
+      text-transform: uppercase; letter-spacing: .12em;
+      margin-bottom: .75rem; padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .skill-tag {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .45rem .9rem; border-radius: 8px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      font-size: .82rem; font-weight: 600; color: var(--text);
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+    .skill-tag:hover {
+      border-color: rgba(124,106,239,.3);
+      box-shadow: 0 4px 20px rgba(124,106,239,.1);
+      transform: translateY(-2px);
+    }
+    .skill-tag i { color: var(--accent); font-size: .9rem; }
+
+    /* ════════════════════════════════════════
+       EXPERIENCE
+    ════════════════════════════════════════ */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 8px; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 3rem; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -2rem; top: 6px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg); border: 3px solid var(--accent);
+      z-index: 1;
+    }
+    .tl-item:first-child .tl-dot { border-color: var(--mint); box-shadow: 0 0 12px rgba(45,212,168,.3); }
+    .tl-period { font-size: .78rem; font-weight: 600; color: var(--mint); margin-bottom: .25rem; }
+    .tl-company { font-size: 1.2rem; font-weight: 800; margin-bottom: .15rem; }
+    .tl-role { font-size: .88rem; color: var(--text-2); margin-bottom: .75rem; }
+    .tl-body { color: var(--text-2); font-size: .92rem; line-height: 1.85; }
+    .tl-body ul { list-style: none; padding: 0; }
+    .tl-body li { position: relative; padding-left: 1.2rem; margin-bottom: .4rem; }
+    .tl-body li::before {
+      content: ''; position: absolute; left: 0; top: .65rem;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: .6;
+    }
+    .tl-tech { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+    .tl-tech span {
+      padding: .2rem .6rem; border-radius: 6px; font-size: .7rem; font-weight: 600;
+      background: rgba(124,106,239,.1); color: var(--accent);
+    }
+    .tl-source a:hover {
+      border-color: rgba(124,106,239,.3) !important;
+      box-shadow: 0 4px 20px rgba(124,106,239,.1) !important;
+      transform: translateY(-2px);
+    }
+
+    /* ════════════════════════════════════════
+       CERTIFICATIONS
+    ════════════════════════════════════════ */
+    .certs-section { background: var(--bg-alt); }
+    .certs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;
+    }
+    .cert-card {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.15rem 1.35rem;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+    .cert-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(124,106,239,.25);
+      box-shadow: 0 8px 30px rgba(124,106,239,.08);
+    }
+    .cert-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .cert-icon.aws { background: rgba(255,153,0,.12); color: #f59e0b; }
+    .cert-icon.linux { background: rgba(45,212,168,.12); color: var(--mint); }
+    .cert-icon.ipa { background: rgba(124,106,239,.12); color: var(--accent); }
+    .cert-icon.other { background: rgba(144,144,168,.1); color: var(--text-2); }
+    .cert-link { text-decoration: none; color: var(--text); cursor: pointer; }
+    .cert-link:hover { color: var(--text); }
+    .cert-ext { font-size: .65rem; color: var(--text-3); align-self: center; transition: color .3s; }
+    .cert-link:hover .cert-ext { color: var(--accent); }
+    .cert-body { flex: 1; min-width: 0; }
+    .cert-name { font-size: .85rem; font-weight: 700; line-height: 1.4; }
+    .cert-date { font-size: .72rem; color: var(--text-3); margin-top: .15rem; }
+
+    /* ════════════════════════════════════════
+       PUBLICATIONS
+    ════════════════════════════════════════ */
+    .pub-list { display: flex; flex-direction: column; gap: .75rem; }
+    .pub-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.15rem 1.35rem;
+      text-decoration: none; color: var(--text);
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+    .pub-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(124,106,239,.25);
+      box-shadow: 0 8px 30px rgba(124,106,239,.08);
+      color: var(--text);
+    }
+    .pub-icon {
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem;
+    }
+    .pub-icon.talk { background: rgba(244,114,182,.12); color: var(--pink); }
+    .pub-icon.blog { background: rgba(45,212,168,.12); color: var(--mint); }
+    .pub-body { flex: 1; min-width: 0; }
+    .pub-title { font-size: .88rem; font-weight: 700; line-height: 1.5; }
+    .pub-meta { font-size: .72rem; color: var(--text-3); margin-top: .15rem; }
+    .pub-arrow { color: var(--text-3); transition: transform .3s, color .3s; align-self: center; font-size: .85rem; }
+    .pub-item:hover .pub-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ════════════════════════════════════════
+       LINKS
+    ════════════════════════════════════════ */
+    .links-section { background: var(--bg-alt); }
+    .links-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+    }
+    .link-card {
+      display: flex; align-items: center; gap: 1.15rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.25rem 1.4rem;
+      text-decoration: none; color: var(--text);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .link-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124,106,239,.3);
+      box-shadow: 0 12px 40px rgba(124,106,239,.1);
+      color: var(--text);
+    }
+    .link-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px;
+      background: rgba(124,106,239,.1); font-size: 1.2rem; color: var(--accent);
+      transition: background var(--transition), color var(--transition);
+    }
+    .link-card:hover .link-icon { background: var(--accent); color: #fff; }
+    .link-body { flex: 1; min-width: 0; }
+    .link-name { font-weight: 700; font-size: .92rem; }
+    .link-desc { font-size: .75rem; color: var(--text-2); margin-top: .1rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .link-arrow { color: var(--text-3); font-size: .85rem; transition: transform .3s, color .3s; }
+    .link-card:hover .link-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    .footer {
+      text-align: center; padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-3); font-size: .78rem;
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+
+    /* ════════════════════════════════════════
+       REVEAL ANIMATION
+    ════════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .65s cubic-bezier(.4,0,.2,1), transform .65s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 700px) {
+      section { padding: 4.5rem 1.25rem; }
+      .nav-inner { padding: .8rem 1.25rem; }
+      .about-card { padding: 1.75rem 1.4rem; }
+      .about-highlights { grid-template-columns: repeat(2, 1fr); }
+      .certs-grid { grid-template-columns: 1fr; }
+      .links-grid { grid-template-columns: 1fr; }
+      .timeline { padding-left: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">H.Uejima</a>
+    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    <div class="nav-overlay"></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Output</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#links">Links</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <span class="hero-label">Welcome to my portfolio</span>
+    <h1 class="hero-name">Haruki Uejima</h1>
+    <p class="hero-role">SRE / Platform Engineer</p>
+    <div class="hero-keywords">
+      <span>AWS</span><span>Kubernetes</span><span>Go</span><span>Terraform</span><span>SRE</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#links"><i class="fa-solid fa-arrow-right"></i> Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-ind"><span></span></div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">About</p>
+      <h2 class="sec-title">自己紹介</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="about-card reveal">
+      <div class="about-text">
+        <p>SRE / Platform Engineer として、AWS と OpenStack のマルチクラウド環境でのインフラ運用・改善に取り組んでいます。国内大規模 EC サービス（店舗数 約5万・流通総額 約2,000億円）や、レジャー予約プラットフォームなど、高トラフィックなサービスの信頼性向上を担ってきました。</p>
+        <p>SLI/SLO に基づく監視運用、Kubernetes クラスタの構築・アップグレード、Argo CD / Argo Rollouts によるプログレッシブデリバリー、Terraform を用いた IaC 推進、AWS コスト最適化（月額 20% 削減、アーキテクチャ改善で日額 80% 削減）などが主な専門領域です。</p>
+        <p>新しい技術へのキャッチアップを大切にしており、学んだ知見をテックブログや登壇を通じて積極的にアウトプットしています。RDS ブルー/グリーンデプロイや NGINX レートリミットに関する記事は、それぞれ 60・40 件以上のはてなブックマークを獲得しました。AWS 認定資格は Solutions Architect Professional を含む 8 つを保有し、LPIC-3 まで取得しています。</p>
+      </div>
+      <div class="about-highlights">
+        <div class="hl"><div class="hl-num">5+</div><div class="hl-label">Years of Experience</div></div>
+        <div class="hl"><div class="hl-num">8</div><div class="hl-label">AWS Certifications</div></div>
+        <div class="hl"><div class="hl-num">10+</div><div class="hl-label">Tech Blog Posts</div></div>
+        <div class="hl"><div class="hl-num">2</div><div class="hl-label">Conference Talks</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">Skills</p>
+      <h2 class="sec-title">技術スタック</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-code"></i> Languages</p>
+      <div class="skill-tags">
+        <span class="skill-tag"><i class="fa-brands fa-golang"></i> Go</span>
+        <span class="skill-tag"><i class="fa-solid fa-gem"></i> Ruby</span>
+        <span class="skill-tag"><i class="fa-brands fa-python"></i> Python</span>
+        <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+        <span class="skill-tag"><i class="fa-brands fa-java"></i> Java</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-brands fa-aws"></i> AWS</p>
+      <div class="skill-tags">
+        <span class="skill-tag">VPC</span>
+        <span class="skill-tag">S3</span>
+        <span class="skill-tag">CloudFront</span>
+        <span class="skill-tag">Lambda</span>
+        <span class="skill-tag">ELB</span>
+        <span class="skill-tag">EC2</span>
+        <span class="skill-tag">ECS / Fargate</span>
+        <span class="skill-tag">EKS (Kubernetes)</span>
+        <span class="skill-tag">Route 53</span>
+        <span class="skill-tag">IAM</span>
+        <span class="skill-tag">RDS (MySQL) / Aurora</span>
+        <span class="skill-tag">ElastiCache (Redis / Memcached)</span>
+        <span class="skill-tag">Kinesis / Kinesis Firehose</span>
+        <span class="skill-tag">SQS</span>
+        <span class="skill-tag">SNS</span>
+        <span class="skill-tag">SES</span>
+        <span class="skill-tag">CloudFormation</span>
+        <span class="skill-tag">CodePipeline</span>
+        <span class="skill-tag">CloudWatch</span>
+        <span class="skill-tag">CloudTrail</span>
+        <span class="skill-tag">Direct Connect</span>
+        <span class="skill-tag">Secrets Manager</span>
+        <span class="skill-tag">Parameter Store</span>
+        <span class="skill-tag">Step Functions</span>
+        <span class="skill-tag">EventBridge Scheduler</span>
+        <span class="skill-tag">VPC Peering / Endpoint</span>
+        <span class="skill-tag">AWS Organizations</span>
+        <span class="skill-tag">External Secrets</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-server"></i> Infrastructure</p>
+      <div class="skill-tags">
+        <span class="skill-tag"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</span>
+        <span class="skill-tag"><i class="fa-brands fa-docker"></i> Docker</span>
+        <span class="skill-tag">OpenStack</span>
+        <span class="skill-tag">NGINX</span>
+        <span class="skill-tag">Terraform</span>
+        <span class="skill-tag">Ansible</span>
+        <span class="skill-tag">Puppet</span>
+        <span class="skill-tag">Helm</span>
+        <span class="skill-tag">Consul</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-chart-line"></i> Monitoring &amp; CI/CD</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Datadog</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">Mackerel</span>
+        <span class="skill-tag">Sentry</span>
+        <span class="skill-tag">Fluentd</span>
+        <span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">Argo CD</span>
+        <span class="skill-tag">Argo Rollouts</span>
+        <span class="skill-tag">CircleCI</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-database"></i> Data</p>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Redis</span>
+        <span class="skill-tag">Memcached</span>
+        <span class="skill-tag">Redash</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">Experience</p>
+      <h2 class="sec-title">職務経歴</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="timeline">
+      <!-- Asoview -->
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-period">2025.04 — 現在</p>
+        <h3 class="tl-company">アソビュー株式会社</h3>
+        <p class="tl-role">SRE</p>
+        <div class="tl-body">
+          <ul>
+            <li>Argo Rollouts + Istio + Datadog によるプログレッシブデリバリーの導入・運用</li>
+            <li>EKS Cluster v1.30 へのバージョンアップグレード</li>
+            <li>Argo Workflows / Datadog Agent の最新バージョンアップグレード</li>
+            <li>Serverless Framework EOL に伴う Terraform + Lambroll への移行</li>
+            <li>Argo CD サイドカープラグインに helmfile-plugin / kustomize-plugin の並行運用を構築</li>
+          </ul>
+          <div class="tl-tech">
+            <span>AWS</span><span>EKS</span><span>Argo CD</span><span>Argo Rollouts</span><span>Istio</span><span>Terraform</span><span>Datadog</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pepabo -->
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-period">2022.09 — 2025.03</p>
+        <h3 class="tl-company">GMOペパボ株式会社</h3>
+        <p class="tl-role">SRE — カラーミーショップ（店舗数 約5万・流通総額 約2,000億円）</p>
+        <div class="tl-body">
+          <ul>
+            <li>AWS インフラコスト削減（S3・CloudWatch Logs 月額 20% 削減、RDS 監査ログ保全アーキテクチャで日額 80% 削減）</li>
+            <li>RDS for MySQL 8.0 ブルー/グリーンデプロイによるダウンタイム最小アップグレード</li>
+            <li>CentOS → Ubuntu VM 移行（OpenStack Octavia カナリアリリース）</li>
+            <li>NGINX レートリミット導入（統計手法を活用した閾値設計）</li>
+            <li>Kubernetes クラスタアップデート（OpenStack + EKS マルチクラウド、ダウンタイムゼロ）</li>
+            <li>Gmail ガイドライン対応（OpenDKIM / OpenARC 導入）</li>
+            <li>Kubernetes への Datadog 導入・SLI/SLO 監視運用</li>
+            <li>24/365 オンコールシフト体制での障害対応</li>
+          </ul>
+          <div class="tl-tech">
+            <span>AWS</span><span>OpenStack</span><span>Kubernetes</span><span>Go</span><span>Terraform</span><span>Puppet</span><span>NGINX</span><span>Datadog</span><span>Mackerel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OKAN -->
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-period">2021.09 — 2022.08</p>
+        <h3 class="tl-company">株式会社OKAN</h3>
+        <p class="tl-role">Software Engineer</p>
+        <div class="tl-body">
+          <ul>
+            <li>AWS インフラの設計・CloudFormation による IaC 化（自ら提案し実施）</li>
+            <li>CloudFront + S3 静的配信基盤、Aurora MySQL、ECS on Fargate の構築</li>
+            <li>CodePipeline による Blue/Green デプロイの CI/CD 整備</li>
+            <li>Ruby on Rails + React/TypeScript の既存システム改修</li>
+            <li>ITGC 関連業務・IPO 準備</li>
+          </ul>
+          <div class="tl-tech">
+            <span>AWS</span><span>CloudFormation</span><span>ECS</span><span>Aurora</span><span>Ruby on Rails</span><span>TypeScript</span><span>React</span><span>Docker</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SES -->
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-period">2020.04 — 2021.08</p>
+        <h3 class="tl-company">SES 企業</h3>
+        <p class="tl-role">Software Engineer</p>
+        <div class="tl-body">
+          <ul>
+            <li>大手電力会社の電力需給量の実証実験 — バッチ処理開発</li>
+            <li>Java + MySQL による消費量データ処理バッチの新規開発</li>
+          </ul>
+          <div class="tl-tech">
+            <span>Java</span><span>MySQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-source reveal" style="margin-top:2.5rem;text-align:center">
+      <a href="https://github.com/harukin721/curriculum_vitae" target="_blank" rel="noopener noreferrer"
+         style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.5rem;border-radius:99px;
+                background:var(--bg-card);border:1px solid var(--border);color:var(--text);
+                font-size:.85rem;font-weight:600;text-decoration:none;
+                transition:border-color .3s,box-shadow .3s,transform .3s">
+        <i class="fa-brands fa-github"></i> 詳細な職務経歴書を見る
+        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.7rem;color:var(--text-2)"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PUBLICATIONS ═══ -->
+<section id="publications" class="certs-section">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">Publications &amp; Talks</p>
+      <h2 class="sec-title">登壇・執筆</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="pub-list">
+
+      <a href="https://tech.asoview.co.jp/entry/2025/12/10/102023" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">Argo Rollouts と Datadog を活用した Progressive Delivery 実践</p>
+          <p class="pub-meta">2025.12.10 — asoview! Tech Blog</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.asoview.co.jp/entry/2025/11/12/163350" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">AWS NAT Gateway の通信分析から始めるコスト最適化の取り組み</p>
+          <p class="pub-meta">2025.11.12 — asoview! Tech Blog</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2025/04/16/colorme-rds-audit-logs-s3/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">Amazon RDSの監査ログを保全する信頼性の高いソフトウェアの設計と実装について</p>
+          <p class="pub-meta">2025.04.16 — Pepabo Tech Portal — 30+ はてなブックマーク</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2024/07/26/sre-next-kyoto/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon talk"><i class="fa-solid fa-microphone"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">Road to SRE NEXT@京都 に登壇しました</p>
+          <p class="pub-meta">2024.07.26 — Pepabo Tech Portal — 登壇</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2024/05/10/rds-blue-green-deployment/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">Amazon RDS ブルー/グリーンデプロイを利用してMySQLのアップグレードをした話</p>
+          <p class="pub-meta">2024.05.10 — Pepabo Tech Portal — 60+ はてなブックマーク</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2024/02/16/isucon-2023/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">日本CTO協会による合同ISUCON研修の紹介</p>
+          <p class="pub-meta">2024.02.16 — Pepabo Tech Portal</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2023/12/22/cloudnative-days-tokyo-2023/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">CloudNative Days Tokyo 2023に参加しました</p>
+          <p class="pub-meta">2023.12.22 — Pepabo Tech Portal</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2023/12/15/nginx-rate-limit/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">データに基づく統計手法を用いてNGINXのレートリミットを設定する</p>
+          <p class="pub-meta">2023.12.15 — Pepabo Tech Portal — 40+ はてなブックマーク</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2023/04/28/pepabotech/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon talk"><i class="fa-solid fa-microphone"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">Pepabo Tech Conference 20 春のSREまつり 開催レポート</p>
+          <p class="pub-meta">2023.04.28 — Pepabo Tech Portal — 登壇</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+      <a href="https://tech.pepabo.com/2022/12/14/reading-logical-thinking/" target="_blank" rel="noopener noreferrer" class="pub-item reveal">
+        <div class="pub-icon blog"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="pub-body">
+          <p class="pub-title">『入門 考える技術・書く技術』の読書会を開催しました</p>
+          <p class="pub-meta">2022.12.14 — Pepabo Tech Portal</p>
+        </div>
+        <i class="fa-solid fa-arrow-right pub-arrow"></i>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CERTIFICATIONS ═══ -->
+<section id="certifications">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">Certifications</p>
+      <h2 class="sec-title">保有資格</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="certs-grid">
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS Solutions Architect - Professional</p>
+          <p class="cert-date">2026.01</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon linux"><i class="fa-brands fa-linux"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">LPIC-3 Virtualization and Containerization</p>
+          <p class="cert-date">2025.10</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS Data Engineer - Associate</p>
+          <p class="cert-date">2025.05</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS AI Practitioner</p>
+          <p class="cert-date">2025.04</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <div class="cert-card reveal">
+        <div class="cert-icon ipa"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">基本情報技術者試験</p>
+          <p class="cert-date">2024.06</p>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon ipa"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">情報セキュリティマネジメント試験</p>
+          <p class="cert-date">2023.09</p>
+        </div>
+      </div>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon linux"><i class="fa-brands fa-linux"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">LPIC-2</p>
+          <p class="cert-date">2022.12</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS SysOps Administrator - Associate</p>
+          <p class="cert-date">2021.06</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS Developer - Associate</p>
+          <p class="cert-date">2021.04</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS Solutions Architect - Associate</p>
+          <p class="cert-date">2021.03</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon linux"><i class="fa-brands fa-linux"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">LPIC-1</p>
+          <p class="cert-date">2020.12</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS Cloud Practitioner</p>
+          <p class="cert-date">2020.10</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <div class="cert-card reveal">
+        <div class="cert-icon ipa"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">ITパスポート試験</p>
+          <p class="cert-date">2020.03</p>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon other"><i class="fa-solid fa-calculator"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">日商簿記検定 3級</p>
+          <p class="cert-date">2018.03</p>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon other"><i class="fa-solid fa-car"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">普通自動車第一種免許</p>
+          <p class="cert-date">2015.10</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LINKS ═══ -->
+<section id="links" class="links-section">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">Links</p>
+      <h2 class="sec-title">各種リンク</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="links-grid">
+
+      <a href="https://github.com/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-brands fa-github"></i></div>
+        <div class="link-body">
+          <p class="link-name">GitHub</p>
+          <p class="link-desc">@harukin721</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+      <a href="https://x.com/harukin721/" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-brands fa-x-twitter"></i></div>
+        <div class="link-body">
+          <p class="link-name">X (Twitter)</p>
+          <p class="link-desc">@harukin721</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+      <a href="https://harukin721.hatenablog.com/" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-solid fa-blog"></i></div>
+        <div class="link-body">
+          <p class="link-name">Hatena Blog</p>
+          <p class="link-desc">日々の学びを発信</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+      <a href="https://speakerdeck.com/harukin721/" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-solid fa-display"></i></div>
+        <div class="link-body">
+          <p class="link-name">Speaker Deck</p>
+          <p class="link-desc">登壇・発表資料</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+      <a href="https://qiita.com/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <div class="link-body">
+          <p class="link-name">Qiita</p>
+          <p class="link-desc">技術記事</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+      <a href="https://www.wantedly.com/id/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-solid fa-briefcase"></i></div>
+        <div class="link-body">
+          <p class="link-name">Wantedly</p>
+          <p class="link-desc">キャリアプロフィール</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+      <a href="https://youtrust.jp/users/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-solid fa-handshake"></i></div>
+        <div class="link-body">
+          <p class="link-name">YOUTRUST</p>
+          <p class="link-desc">副業・転職プラットフォーム</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-solid fa-award"></i></div>
+        <div class="link-body">
+          <p class="link-name">Credly</p>
+          <p class="link-desc">認定資格・バッジ</p>
+        </div>
+        <i class="fa-solid fa-arrow-right link-arrow"></i>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <p>&copy; 2025 Haruki Uejima &mdash; <a href="https://harukiuejima.com">harukiuejima.com</a></p>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+// ── Scroll Reveal ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      requestAnimationFrame(() => {
+        entry.target.style.transitionDelay = `${i * 50}ms`;
+        entry.target.classList.add('show');
+      });
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── Nav hide/show ──
+let prevY = 0;
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > prevY && y > 100) nav.classList.add('hide');
+  else nav.classList.remove('hide');
+  prevY = y;
+}, { passive: true });
+
+// ── Mobile nav ──
+const toggle = document.querySelector('.nav-toggle');
+const links = document.querySelector('.nav-links');
+const overlay = document.querySelector('.nav-overlay');
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
+    overlay.classList.toggle('open');
+  });
+  overlay.addEventListener('click', () => {
+    links.classList.remove('open');
+    overlay.classList.remove('open');
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  });
+}
+</script>
+</body>
+</html>
