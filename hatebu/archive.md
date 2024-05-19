@@ -1,5 +1,6 @@
 # Hatena Blog
 
+- [gofe - harukin721](https://harukin721.hatenablog.com/entry/2024/05/19/230107?_gl=1*y0onox*_gcl_au*NTE5NTI3NDk3LjE3MTQ4MTQ2NDg.)
 - [「AWSコスト最適化ガイドブック」を読んだのでメモ2 - harukin721](https://harukin721.hatenablog.com/entry/2024/03/27/200638)
 - [「AWSコスト最適化ガイドブック」を読んだのでメモ1 - harukin721](https://harukin721.hatenablog.com/entry/2024/03/24/232157)
 - [Infracostというものを使うとTerraformのテンプレートファイルからAWSのコスト試算ができる - harukin721](https://harukin721.hatenablog.com/entry/2024/03/08/123707)
