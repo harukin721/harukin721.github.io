@@ -168,23 +168,6 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 36px var(--accent-glow);
     }
-    .scroll-ind {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      z-index: 1; opacity: 0; animation: fadeUp .8s 1.3s forwards;
-    }
-    .scroll-ind span {
-      display: block; width: 20px; height: 32px;
-      border: 2px solid var(--text-3); border-radius: 99px; position: relative;
-    }
-    .scroll-ind span::after {
-      content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
-      width: 3px; height: 8px; border-radius: 99px; background: var(--text-3);
-      animation: scrollDot 1.8s infinite;
-    }
-    @keyframes scrollDot {
-      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-      100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -366,6 +349,52 @@
     .pub-item:hover .pub-arrow { transform: translateX(4px); color: var(--accent); }
 
     /* ════════════════════════════════════════
+       LATEST POSTS
+    ════════════════════════════════════════ */
+    .posts-grid { display: flex; flex-direction: column; gap: .75rem; }
+    .post-card {
+      display: flex; align-items: center; gap: 1.25rem;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.15rem 1.5rem;
+      text-decoration: none; color: var(--text);
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(124,106,239,.25);
+      box-shadow: 0 8px 30px rgba(124,106,239,.08);
+      color: var(--text);
+    }
+    .post-num {
+      flex-shrink: 0; font-size: 1.5rem; font-weight: 900;
+      color: rgba(124,106,239,.2); line-height: 1; min-width: 2rem; text-align: right;
+    }
+    .post-body { flex: 1; min-width: 0; }
+    .post-title { font-size: .92rem; font-weight: 700; line-height: 1.55; }
+    .post-meta { font-size: .72rem; color: var(--text-3); margin-top: .25rem; }
+    .post-arrow { color: var(--text-3); font-size: .85rem; transition: transform .3s, color .3s; flex-shrink: 0; }
+    .post-card:hover .post-arrow { transform: translateX(4px); color: var(--accent); }
+    .posts-more { margin-top: 1.5rem; text-align: center; }
+    .posts-more a {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .55rem 1.4rem; border-radius: 99px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-2); font-size: .82rem; font-weight: 600; text-decoration: none;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .posts-more a:hover { border-color: rgba(124,106,239,.3); color: var(--text); }
+    .posts-skeleton { display: flex; flex-direction: column; gap: .75rem; }
+    .skeleton-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.35rem 1.5rem;
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    .skeleton-line { height: 12px; border-radius: 6px; background: rgba(255,255,255,.05); }
+    .skeleton-line.wide { width: 80%; margin-bottom: .6rem; }
+    .skeleton-line.mid  { width: 40%; height: 10px; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+
+    /* ════════════════════════════════════════
        LINKS
     ════════════════════════════════════════ */
     .links-section { background: var(--bg-alt); }
@@ -442,10 +471,11 @@
     <div class="nav-overlay"></div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#publications">Output</a></li>
+      <li><a href="#skills">Skills</a></li>
       <li><a href="#certifications">Certs</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#links">Links</a></li>
     </ul>
   </div>
@@ -464,7 +494,7 @@
     <h1 class="hero-name">Haruki Uejima</h1>
     <p class="hero-role">SRE / Platform Engineer</p>
     <div class="hero-keywords">
-      <span>AWS</span><span>Kubernetes</span><span>Go</span><span>Terraform</span><span>SRE</span>
+      <span>Linux</span><span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>GitHub Actions</span><span>Argo CD</span><span>Go</span>
     </div>
     <div class="hero-cta">
       <a href="#links"><i class="fa-solid fa-arrow-right"></i> Get in Touch</a>
@@ -489,106 +519,9 @@
       </div>
       <div class="about-highlights">
         <div class="hl"><div class="hl-num">5+</div><div class="hl-label">Years of Experience</div></div>
-        <div class="hl"><div class="hl-num">8</div><div class="hl-label">AWS Certifications</div></div>
-        <div class="hl"><div class="hl-num">10+</div><div class="hl-label">Tech Blog Posts</div></div>
         <div class="hl"><div class="hl-num">2</div><div class="hl-label">Conference Talks</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SKILLS ═══ -->
-<section id="skills" class="skills-section">
-  <div class="container">
-    <div class="sec-head reveal">
-      <p class="sec-label">Skills</p>
-      <h2 class="sec-title">技術スタック</h2>
-      <div class="sec-line"></div>
-    </div>
-
-    <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-solid fa-code"></i> Languages</p>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="fa-brands fa-golang"></i> Go</span>
-        <span class="skill-tag"><i class="fa-solid fa-gem"></i> Ruby</span>
-        <span class="skill-tag"><i class="fa-brands fa-python"></i> Python</span>
-        <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
-        <span class="skill-tag"><i class="fa-brands fa-java"></i> Java</span>
-      </div>
-    </div>
-
-    <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-brands fa-aws"></i> AWS</p>
-      <div class="skill-tags">
-        <span class="skill-tag">VPC</span>
-        <span class="skill-tag">S3</span>
-        <span class="skill-tag">CloudFront</span>
-        <span class="skill-tag">Lambda</span>
-        <span class="skill-tag">ELB</span>
-        <span class="skill-tag">EC2</span>
-        <span class="skill-tag">ECS / Fargate</span>
-        <span class="skill-tag">EKS (Kubernetes)</span>
-        <span class="skill-tag">Route 53</span>
-        <span class="skill-tag">IAM</span>
-        <span class="skill-tag">RDS (MySQL) / Aurora</span>
-        <span class="skill-tag">ElastiCache (Redis / Memcached)</span>
-        <span class="skill-tag">Kinesis / Kinesis Firehose</span>
-        <span class="skill-tag">SQS</span>
-        <span class="skill-tag">SNS</span>
-        <span class="skill-tag">SES</span>
-        <span class="skill-tag">CloudFormation</span>
-        <span class="skill-tag">CodePipeline</span>
-        <span class="skill-tag">CloudWatch</span>
-        <span class="skill-tag">CloudTrail</span>
-        <span class="skill-tag">Direct Connect</span>
-        <span class="skill-tag">Secrets Manager</span>
-        <span class="skill-tag">Parameter Store</span>
-        <span class="skill-tag">Step Functions</span>
-        <span class="skill-tag">EventBridge Scheduler</span>
-        <span class="skill-tag">VPC Peering / Endpoint</span>
-        <span class="skill-tag">AWS Organizations</span>
-        <span class="skill-tag">External Secrets</span>
-      </div>
-    </div>
-
-    <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-solid fa-server"></i> Infrastructure</p>
-      <div class="skill-tags">
-        <span class="skill-tag"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</span>
-        <span class="skill-tag"><i class="fa-brands fa-docker"></i> Docker</span>
-        <span class="skill-tag">OpenStack</span>
-        <span class="skill-tag">NGINX</span>
-        <span class="skill-tag">Terraform</span>
-        <span class="skill-tag">Ansible</span>
-        <span class="skill-tag">Puppet</span>
-        <span class="skill-tag">Helm</span>
-        <span class="skill-tag">Consul</span>
-      </div>
-    </div>
-
-    <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-solid fa-chart-line"></i> Monitoring &amp; CI/CD</p>
-      <div class="skill-tags">
-        <span class="skill-tag">Datadog</span>
-        <span class="skill-tag">Prometheus</span>
-        <span class="skill-tag">Grafana</span>
-        <span class="skill-tag">Mackerel</span>
-        <span class="skill-tag">Sentry</span>
-        <span class="skill-tag">Fluentd</span>
-        <span class="skill-tag">GitHub Actions</span>
-        <span class="skill-tag">Argo CD</span>
-        <span class="skill-tag">Argo Rollouts</span>
-        <span class="skill-tag">CircleCI</span>
-      </div>
-    </div>
-
-    <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-solid fa-database"></i> Data</p>
-      <div class="skill-tags">
-        <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">Redis</span>
-        <span class="skill-tag">Memcached</span>
-        <span class="skill-tag">Redash</span>
+        <div class="hl"><div class="hl-num">10+</div><div class="hl-label">Certifications</div></div>
+        <div class="hl"><div class="hl-num">10+</div><div class="hl-label">Tech Blog Posts</div></div>
       </div>
     </div>
   </div>
@@ -802,6 +735,103 @@
   </div>
 </section>
 
+<!-- ═══ SKILLS ═══ -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">Skills</p>
+      <h2 class="sec-title">技術スタック</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-code"></i> Languages</p>
+      <div class="skill-tags">
+        <span class="skill-tag"><i class="fa-brands fa-golang"></i> Go</span>
+        <span class="skill-tag"><i class="fa-solid fa-gem"></i> Ruby</span>
+        <span class="skill-tag"><i class="fa-brands fa-python"></i> Python</span>
+        <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+        <span class="skill-tag"><i class="fa-brands fa-java"></i> Java</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-brands fa-aws"></i> AWS</p>
+      <div class="skill-tags">
+        <span class="skill-tag">VPC</span>
+        <span class="skill-tag">S3</span>
+        <span class="skill-tag">CloudFront</span>
+        <span class="skill-tag">Lambda</span>
+        <span class="skill-tag">ELB</span>
+        <span class="skill-tag">EC2</span>
+        <span class="skill-tag">ECS / Fargate</span>
+        <span class="skill-tag">EKS (Kubernetes)</span>
+        <span class="skill-tag">Route 53</span>
+        <span class="skill-tag">IAM</span>
+        <span class="skill-tag">RDS (MySQL) / Aurora</span>
+        <span class="skill-tag">ElastiCache (Redis / Memcached)</span>
+        <span class="skill-tag">Kinesis / Kinesis Firehose</span>
+        <span class="skill-tag">SQS</span>
+        <span class="skill-tag">SNS</span>
+        <span class="skill-tag">SES</span>
+        <span class="skill-tag">CloudFormation</span>
+        <span class="skill-tag">CodePipeline</span>
+        <span class="skill-tag">CloudWatch</span>
+        <span class="skill-tag">CloudTrail</span>
+        <span class="skill-tag">Direct Connect</span>
+        <span class="skill-tag">Secrets Manager</span>
+        <span class="skill-tag">Parameter Store</span>
+        <span class="skill-tag">Step Functions</span>
+        <span class="skill-tag">EventBridge Scheduler</span>
+        <span class="skill-tag">VPC Peering / Endpoint</span>
+        <span class="skill-tag">AWS Organizations</span>
+        <span class="skill-tag">External Secrets</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-server"></i> Infrastructure</p>
+      <div class="skill-tags">
+        <span class="skill-tag"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</span>
+        <span class="skill-tag"><i class="fa-brands fa-docker"></i> Docker</span>
+        <span class="skill-tag">OpenStack</span>
+        <span class="skill-tag">NGINX</span>
+        <span class="skill-tag">Terraform</span>
+        <span class="skill-tag">Ansible</span>
+        <span class="skill-tag">Puppet</span>
+        <span class="skill-tag">Helm</span>
+        <span class="skill-tag">Consul</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-chart-line"></i> Monitoring &amp; CI/CD</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Datadog</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">Mackerel</span>
+        <span class="skill-tag">Sentry</span>
+        <span class="skill-tag">Fluentd</span>
+        <span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">Argo CD</span>
+        <span class="skill-tag">Argo Rollouts</span>
+        <span class="skill-tag">CircleCI</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-database"></i> Data</p>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Redis</span>
+        <span class="skill-tag">Memcached</span>
+        <span class="skill-tag">Redash</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ CERTIFICATIONS ═══ -->
 <section id="certifications">
   <div class="container">
@@ -927,6 +957,34 @@
         </div>
       </div>
     </div>
+    <div class="posts-more" style="margin-top:1.5rem">
+      <a href="https://www.credly.com/users/harukin721/badges#credly" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-award"></i> Credly でバッジを見る <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.7rem"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LATEST POSTS ═══ -->
+<section id="blog" class="certs-section">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-label">Blog</p>
+      <h2 class="sec-title">最新記事</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div id="posts-container">
+      <div class="posts-skeleton">
+        <div class="skeleton-card"><div class="skeleton-line wide"></div><div class="skeleton-line mid"></div></div>
+        <div class="skeleton-card"><div class="skeleton-line wide"></div><div class="skeleton-line mid"></div></div>
+        <div class="skeleton-card"><div class="skeleton-line wide"></div><div class="skeleton-line mid"></div></div>
+      </div>
+    </div>
+    <div class="posts-more">
+      <a href="https://harukin721.hatenablog.com" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-blog"></i> はてなブログで全記事を見る <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.7rem"></i>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -958,11 +1016,11 @@
         <i class="fa-solid fa-arrow-right link-arrow"></i>
       </a>
 
-      <a href="https://harukin721.hatenablog.com/" target="_blank" rel="noopener noreferrer" class="link-card reveal">
-        <div class="link-icon"><i class="fa-solid fa-blog"></i></div>
+      <a href="https://www.wantedly.com/id/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
+        <div class="link-icon"><i class="fa-solid fa-briefcase"></i></div>
         <div class="link-body">
-          <p class="link-name">Hatena Blog</p>
-          <p class="link-desc">日々の学びを発信</p>
+          <p class="link-name">Wantedly</p>
+          <p class="link-desc">キャリアプロフィール</p>
         </div>
         <i class="fa-solid fa-arrow-right link-arrow"></i>
       </a>
@@ -994,33 +1052,6 @@
         <i class="fa-solid fa-arrow-right link-arrow"></i>
       </a>
 
-      <a href="https://www.wantedly.com/id/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
-        <div class="link-icon"><i class="fa-solid fa-briefcase"></i></div>
-        <div class="link-body">
-          <p class="link-name">Wantedly</p>
-          <p class="link-desc">キャリアプロフィール</p>
-        </div>
-        <i class="fa-solid fa-arrow-right link-arrow"></i>
-      </a>
-
-      <a href="https://youtrust.jp/users/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
-        <div class="link-icon"><i class="fa-solid fa-handshake"></i></div>
-        <div class="link-body">
-          <p class="link-name">YOUTRUST</p>
-          <p class="link-desc">副業・転職プラットフォーム</p>
-        </div>
-        <i class="fa-solid fa-arrow-right link-arrow"></i>
-      </a>
-
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="link-card reveal">
-        <div class="link-icon"><i class="fa-solid fa-award"></i></div>
-        <div class="link-body">
-          <p class="link-name">Credly</p>
-          <p class="link-desc">認定資格・バッジ</p>
-        </div>
-        <i class="fa-solid fa-arrow-right link-arrow"></i>
-      </a>
-
     </div>
   </div>
 </section>
@@ -1045,6 +1076,36 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── Hatena Blog RSS ──
+(async () => {
+  const container = document.getElementById('posts-container');
+  try {
+    const res = await fetch(
+      'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fharukin721.hatenablog.com%2Frss'
+    );
+    const data = await res.json();
+    if (data.status !== 'ok' || !data.items?.length) throw new Error('no items');
+
+    const html = data.items.slice(0, 5).map((item, i) => {
+      const date = new Date(item.pubDate).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' });
+      return `
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="post-card reveal">
+          <span class="post-num">0${i + 1}</span>
+          <div class="post-body">
+            <p class="post-title">${item.title}</p>
+            <p class="post-meta">${date} — Hatena Blog</p>
+          </div>
+          <i class="fa-solid fa-arrow-right post-arrow"></i>
+        </a>`;
+    }).join('');
+
+    container.innerHTML = `<div class="posts-grid">${html}</div>`;
+    container.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } catch {
+    container.innerHTML = '<p style="color:var(--text-3);font-size:.85rem">記事の取得に失敗しました。<a href="https://harukin721.hatenablog.com" target="_blank" rel="noopener noreferrer">はてなブログ</a>をご覧ください。</p>';
+  }
+})();
 
 // ── Nav hide/show ──
 let prevY = 0;
