@@ -542,17 +542,17 @@
         <div class="tl-dot"></div>
         <p class="tl-period">2025.04 — 現在</p>
         <h3 class="tl-company">アソビュー株式会社</h3>
-        <p class="tl-role">SRE</p>
+        <p class="tl-role">SRE / Platform Engineer — アソビュー！（月間PV 3,800万・会員数 1,800万人、2025年3月時点）</p>
         <div class="tl-body">
           <ul>
             <li>Argo Rollouts + Istio + Datadog によるプログレッシブデリバリーの導入・運用</li>
-            <li>EKS Cluster v1.30 へのバージョンアップグレード</li>
-            <li>Argo Workflows / Datadog Agent の最新バージョンアップグレード</li>
-            <li>Serverless Framework EOL に伴う Terraform + Lambroll への移行</li>
+            <li>EKS クラスターのバージョンアップグレード</li>
+            <li>Argo CD・Argo Workflows・Datadog Agent・External Secrets Operator のバージョンアップグレード</li>
+            <li>AWS Serverless Framework の EOL に伴う Terraform + Lambroll への移行</li>
             <li>Argo CD サイドカープラグインに helmfile-plugin / kustomize-plugin の並行運用を構築</li>
           </ul>
           <div class="tl-tech">
-            <span>AWS</span><span>EKS</span><span>Argo CD</span><span>Argo Rollouts</span><span>Istio</span><span>Terraform</span><span>Datadog</span>
+            <span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>GitHub Actions</span><span>CircleCI</span><span>Argo CD</span><span>Argo Rollouts</span><span>Istio</span><span>Datadog</span>
           </div>
         </div>
       </div>
@@ -562,7 +562,7 @@
         <div class="tl-dot"></div>
         <p class="tl-period">2022.09 — 2025.03</p>
         <h3 class="tl-company">GMOペパボ株式会社</h3>
-        <p class="tl-role">SRE — カラーミーショップ（店舗数 約5万・流通総額 約2,000億円）</p>
+        <p class="tl-role">SRE / Platform Engineer — カラーミーショップ（店舗数 22万・流通総額 約2,000億円、2025年3月時点）</p>
         <div class="tl-body">
           <ul>
             <li>AWS インフラコスト削減（S3・CloudWatch Logs 月額 20% 削減、RDS 監査ログ保全アーキテクチャで日額 80% 削減）</li>
@@ -571,11 +571,10 @@
             <li>NGINX レートリミット導入（統計手法を活用した閾値設計）</li>
             <li>Kubernetes クラスタアップデート（OpenStack + EKS マルチクラウド、ダウンタイムゼロ）</li>
             <li>Gmail ガイドライン対応（OpenDKIM / OpenARC 導入）</li>
-            <li>Kubernetes への Datadog 導入・SLI/SLO 監視運用</li>
             <li>24/365 オンコールシフト体制での障害対応</li>
           </ul>
           <div class="tl-tech">
-            <span>AWS</span><span>OpenStack</span><span>Kubernetes</span><span>Go</span><span>Terraform</span><span>Puppet</span><span>NGINX</span><span>Datadog</span><span>Mackerel</span>
+            <span>Linux</span><span>OpenStack</span><span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>GitHub Actions</span><span>Puppet</span><span>Go</span><span>NGINX</span><span>Mackerel</span><span>Datadog</span>
           </div>
         </div>
       </div>
@@ -585,17 +584,16 @@
         <div class="tl-dot"></div>
         <p class="tl-period">2021.09 — 2022.08</p>
         <h3 class="tl-company">株式会社OKAN</h3>
-        <p class="tl-role">Software Engineer</p>
+        <p class="tl-role">Web Engineer</p>
         <div class="tl-body">
           <ul>
-            <li>AWS インフラの設計・CloudFormation による IaC 化（自ら提案し実施）</li>
+            <li>AWS インフラの設計・CloudFormation による IaC 化</li>
             <li>CloudFront + S3 静的配信基盤、Aurora MySQL、ECS on Fargate の構築</li>
             <li>CodePipeline による Blue/Green デプロイの CI/CD 整備</li>
-            <li>Ruby on Rails + React/TypeScript の既存システム改修</li>
-            <li>ITGC 関連業務・IPO 準備</li>
+            <li>Ruby on Rails + TypeScript の既存システム改修</li>
           </ul>
           <div class="tl-tech">
-            <span>AWS</span><span>CloudFormation</span><span>ECS</span><span>Aurora</span><span>Ruby on Rails</span><span>TypeScript</span><span>React</span><span>Docker</span>
+            <span>AWS</span><span>Ruby on Rails</span><span>TypeScript</span>
           </div>
         </div>
       </div>
@@ -605,14 +603,16 @@
         <div class="tl-dot"></div>
         <p class="tl-period">2020.04 — 2021.08</p>
         <h3 class="tl-company">SES 企業</h3>
-        <p class="tl-role">Software Engineer</p>
+        <p class="tl-role">Systems Engineer</p>
         <div class="tl-body">
           <ul>
             <li>大手電力会社の電力需給量の実証実験 — バッチ処理開発</li>
             <li>Java + MySQL による消費量データ処理バッチの新規開発</li>
+            <li>Linux サーバ上での開発・動作確認を担当</li>
+            <li>クラウド・インフラ領域に興味を持ち、LPIC-1 および AWS 認定資格（CLF・SAA・DVA・SOA）を取得</li>
           </ul>
           <div class="tl-tech">
-            <span>Java</span><span>MySQL</span>
+            <span>Linux</span><span>Java</span><span>MySQL</span>
           </div>
         </div>
       </div>
@@ -745,78 +745,93 @@
     </div>
 
     <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-solid fa-code"></i> Languages</p>
+      <p class="skill-cat-title"><i class="fa-solid fa-server"></i> Infrastructure</p>
       <div class="skill-tags">
-        <span class="skill-tag"><i class="fa-brands fa-golang"></i> Go</span>
-        <span class="skill-tag"><i class="fa-solid fa-gem"></i> Ruby</span>
-        <span class="skill-tag"><i class="fa-brands fa-python"></i> Python</span>
-        <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
-        <span class="skill-tag"><i class="fa-brands fa-java"></i> Java</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">OpenStack</span>
+        <span class="skill-tag"><i class="fa-brands fa-docker"></i> Docker</span>
+        <span class="skill-tag"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</span>
+        <span class="skill-tag">NGINX</span>
+        <span class="skill-tag">Terraform</span>
+        <span class="skill-tag">Ansible</span>
+        <span class="skill-tag">Puppet</span>
+        <span class="skill-tag">Helm</span>
+      </div>
+    </div>
+
+    <div class="skill-category reveal">
+      <p class="skill-cat-title"><i class="fa-solid fa-chart-line"></i> CI/CD &amp; Monitoring</p>
+      <div class="skill-tags">
+        <span class="skill-tag">GitHub Actions</span>
+        <span class="skill-tag">CircleCI</span>
+        <span class="skill-tag">Argo CD</span>
+        <span class="skill-tag">Argo Rollouts</span>
+        <span class="skill-tag">Datadog</span>
+        <span class="skill-tag">Mackerel</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">Sentry</span>
+        <span class="skill-tag">Fluentd</span>
       </div>
     </div>
 
     <div class="skill-category reveal">
       <p class="skill-cat-title"><i class="fa-brands fa-aws"></i> AWS</p>
       <div class="skill-tags">
-        <span class="skill-tag">VPC</span>
-        <span class="skill-tag">S3</span>
-        <span class="skill-tag">CloudFront</span>
-        <span class="skill-tag">Lambda</span>
-        <span class="skill-tag">ELB</span>
         <span class="skill-tag">EC2</span>
+        <span class="skill-tag">Auto Scaling</span>
         <span class="skill-tag">ECS / Fargate</span>
+        <span class="skill-tag">ECR</span>
         <span class="skill-tag">EKS (Kubernetes)</span>
-        <span class="skill-tag">Route 53</span>
-        <span class="skill-tag">IAM</span>
+        <span class="skill-tag">Lambda</span>
+        <span class="skill-tag">API Gateway</span>
+        <span class="skill-tag">S3</span>
         <span class="skill-tag">RDS (MySQL) / Aurora</span>
-        <span class="skill-tag">ElastiCache (Redis / Memcached)</span>
-        <span class="skill-tag">Kinesis / Kinesis Firehose</span>
+        <span class="skill-tag">DynamoDB</span>
+        <span class="skill-tag">ElastiCache (Redis)</span>
+        <span class="skill-tag">Kinesis</span>
+        <span class="skill-tag">Data Firehose</span>
+        <span class="skill-tag">Athena</span>
+        <span class="skill-tag">OpenSearch Service</span>
+        <span class="skill-tag">Glue</span>
+        <span class="skill-tag">VPC</span>
+        <span class="skill-tag">ELB</span>
+        <span class="skill-tag">CloudFront</span>
+        <span class="skill-tag">Route 53</span>
+        <span class="skill-tag">Direct Connect</span>
+        <span class="skill-tag">VPC Peering / Endpoint</span>
+        <span class="skill-tag">WAF & Shield</span>
+        <span class="skill-tag">IAM</span>
+        <span class="skill-tag">KMS</span>
+        <span class="skill-tag">Secrets Manager</span>
+        <span class="skill-tag">Parameter Store</span>
+        <span class="skill-tag">GuardDuty</span>
+        <span class="skill-tag">Inspector</span>
+        <span class="skill-tag">Control Tower</span>
         <span class="skill-tag">SQS</span>
         <span class="skill-tag">SNS</span>
         <span class="skill-tag">SES</span>
-        <span class="skill-tag">CloudFormation</span>
+        <span class="skill-tag">EventBridge</span>
+        <span class="skill-tag">CodeCommit</span>
+        <span class="skill-tag">CodeBuild</span>
+        <span class="skill-tag">CodeDeploy</span>
         <span class="skill-tag">CodePipeline</span>
         <span class="skill-tag">CloudWatch</span>
         <span class="skill-tag">CloudTrail</span>
-        <span class="skill-tag">Direct Connect</span>
-        <span class="skill-tag">Secrets Manager</span>
-        <span class="skill-tag">Parameter Store</span>
+        <span class="skill-tag">CloudFormation</span>
         <span class="skill-tag">Step Functions</span>
-        <span class="skill-tag">EventBridge Scheduler</span>
-        <span class="skill-tag">VPC Peering / Endpoint</span>
-        <span class="skill-tag">AWS Organizations</span>
+        <span class="skill-tag">Organizations</span>
         <span class="skill-tag">External Secrets</span>
       </div>
     </div>
 
     <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-solid fa-server"></i> Infrastructure</p>
+      <p class="skill-cat-title"><i class="fa-solid fa-code"></i> Languages</p>
       <div class="skill-tags">
-        <span class="skill-tag"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</span>
-        <span class="skill-tag"><i class="fa-brands fa-docker"></i> Docker</span>
-        <span class="skill-tag">OpenStack</span>
-        <span class="skill-tag">NGINX</span>
-        <span class="skill-tag">Terraform</span>
-        <span class="skill-tag">Ansible</span>
-        <span class="skill-tag">Puppet</span>
-        <span class="skill-tag">Helm</span>
-        <span class="skill-tag">Consul</span>
-      </div>
-    </div>
-
-    <div class="skill-category reveal">
-      <p class="skill-cat-title"><i class="fa-solid fa-chart-line"></i> Monitoring &amp; CI/CD</p>
-      <div class="skill-tags">
-        <span class="skill-tag">Datadog</span>
-        <span class="skill-tag">Prometheus</span>
-        <span class="skill-tag">Grafana</span>
-        <span class="skill-tag">Mackerel</span>
-        <span class="skill-tag">Sentry</span>
-        <span class="skill-tag">Fluentd</span>
-        <span class="skill-tag">GitHub Actions</span>
-        <span class="skill-tag">Argo CD</span>
-        <span class="skill-tag">Argo Rollouts</span>
-        <span class="skill-tag">CircleCI</span>
+        <span class="skill-tag"><i class="fa-brands fa-golang"></i> Go</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag"><i class="fa-brands fa-java"></i> Java</span>
+        <span class="skill-tag"><i class="fa-solid fa-gem"></i> Ruby</span>
       </div>
     </div>
 
@@ -824,8 +839,8 @@
       <p class="skill-cat-title"><i class="fa-solid fa-database"></i> Data</p>
       <div class="skill-tags">
         <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">PostgreSQL</span>
         <span class="skill-tag">Redis</span>
-        <span class="skill-tag">Memcached</span>
         <span class="skill-tag">Redash</span>
       </div>
     </div>
