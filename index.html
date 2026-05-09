@@ -52,12 +52,17 @@
     ════════════════════════════════════════ */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-      background: rgba(8, 8, 12, .78);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       transition: transform .35s cubic-bezier(.4, 0, .2, 1);
     }
+    .nav::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(8, 8, 12, .78);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      pointer-events: none;
+    }
     .nav.hide { transform: translateY(-100%); }
+    .nav-close-item { display: none; }
     .nav-inner {
       max-width: 1100px; margin: 0 auto; padding: .85rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
@@ -83,12 +88,14 @@
         position: fixed; top: 0; right: 0; bottom: 0; width: 220px;
         flex-direction: column; gap: 0;
         background: var(--bg-card); border-left: 1px solid var(--border);
-        padding: 5rem 1.5rem 2rem;
+        padding: 1.25rem 1.5rem 2rem;
         transform: translateX(100%); transition: transform .35s;
         z-index: 1000;
       }
       .nav-links.open { transform: translateX(0); }
       .nav-links a { font-size: 1rem; padding: .75rem 0; display: block; }
+      .nav-close-item { display: flex; justify-content: flex-end; padding-bottom: .75rem; border-bottom: 1px solid var(--border); margin-bottom: .25rem; }
+      .nav-close { background: none; border: none; color: var(--text-2); font-size: 1.4rem; cursor: pointer; padding: .25rem; }
       .nav-overlay {
         position: fixed; inset: 0; background: rgba(0,0,0,.5);
         z-index: 999; opacity: 0; pointer-events: none; transition: opacity .3s;
@@ -466,10 +473,11 @@
 <!-- ═══ NAV ═══ -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">H.Uejima</a>
+    <a href="#" class="nav-logo"></a>
     <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
     <div class="nav-overlay"></div>
     <ul class="nav-links">
+      <li class="nav-close-item"><button class="nav-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></li>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#publications">Output</a></li>
@@ -513,8 +521,8 @@
     </div>
     <div class="about-card reveal">
       <div class="about-text">
-        <p>SRE / Platform Engineer として、AWS と OpenStack のマルチクラウド環境でのインフラ運用・改善に取り組んでいます。国内大規模 EC サービス（店舗数 約5万・流通総額 約2,000億円）や、レジャー予約プラットフォームなど、高トラフィックなサービスの信頼性向上を担ってきました。</p>
-        <p>SLI/SLO に基づく監視運用、Kubernetes クラスタの構築・アップグレード、Argo CD / Argo Rollouts によるプログレッシブデリバリー、Terraform を用いた IaC 推進、AWS コスト最適化（月額 20% 削減、アーキテクチャ改善で日額 80% 削減）などが主な専門領域です。</p>
+        <p>SRE / Platform Engineer として、AWS と OpenStack のマルチクラウド環境でのインフラ運用・改善に取り組んでいます。国内大規模 EC サービス（店舗数 約5万・流通総額 約2,000億円）や、レジャー予約プラットフォームなど、高トラフィックなサービスの信頼性向上を担ってきました。プライベートクラウド（OpenStack）ではメールサーバーや DNS サーバーの構成管理・運用も担当し、インフラ全般にわたる幅広い実務経験を持つ。</p>
+        <p>SLI/SLO に基づく監視運用、Kubernetes クラスタの構築・アップグレード、Argo CD / Argo Rollouts によるプログレッシブデリバリー、Terraform を用いた IaC 推進、AWS コスト最適化（月額 20% 削減、アーキテクチャ改善で日額 80% 削減）などが主な専門領域です。また、Gmail 送信者ガイドライン対応（OpenDKIM・OpenARC 導入による SPF / DKIM / DMARC 準拠）や CentOS EOL に伴う Ubuntu への VM 移行（OpenStack Octavia カナリアリリースによる無停止移行・Terraform + Puppet による構成管理）など、メールインフラ・VM 構成管理の実績も持ちます。</p>
         <p>新しい技術へのキャッチアップを大切にしており、学んだ知見をテックブログや登壇を通じて積極的にアウトプットしています。RDS ブルー/グリーンデプロイや NGINX レートリミットに関する記事は、それぞれ 60・40 件以上のはてなブックマークを獲得しました。AWS 認定資格は Solutions Architect Professional を含む 8 つを保有し、LPIC-3 まで取得しています。</p>
       </div>
       <div class="about-highlights">
@@ -1145,6 +1153,13 @@ if (toggle) {
     links.classList.remove('open');
     overlay.classList.remove('open');
   });
+  const closeBtn = document.querySelector('.nav-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      links.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  }
   links.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       links.classList.remove('open');
