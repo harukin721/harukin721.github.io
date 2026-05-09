@@ -75,25 +75,8 @@
     }
     .nav-links a:hover { color: var(--text); }
 
-    /* mobile nav */
-    .nav-toggle { display: none; background: none; border: none; color: var(--text-2); font-size: 1.3rem; cursor: pointer; }
     @media (max-width: 700px) {
-      .nav-toggle { display: block; }
-      .nav-links {
-        position: fixed; top: 0; right: 0; bottom: 0; width: 220px;
-        flex-direction: column; gap: 0;
-        background: var(--bg-card); border-left: 1px solid var(--border);
-        padding: 5rem 1.5rem 2rem;
-        transform: translateX(100%); transition: transform .35s;
-        z-index: 1000;
-      }
-      .nav-links.open { transform: translateX(0); }
-      .nav-links a { font-size: 1rem; padding: .75rem 0; display: block; }
-      .nav-overlay {
-        position: fixed; inset: 0; background: rgba(0,0,0,.5);
-        z-index: 999; opacity: 0; pointer-events: none; transition: opacity .3s;
-      }
-      .nav-overlay.open { opacity: 1; pointer-events: auto; }
+      .nav-links { display: none; }
     }
 
     /* ════════════════════════════════════════
@@ -467,8 +450,6 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">H.Uejima</a>
-    <button class="nav-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
-    <div class="nav-overlay"></div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -513,8 +494,8 @@
     </div>
     <div class="about-card reveal">
       <div class="about-text">
-        <p>SRE / Platform Engineer として、AWS と OpenStack のマルチクラウド環境でのインフラ運用・改善に取り組んでいます。国内大規模 EC サービス（店舗数 約5万・流通総額 約2,000億円）や、レジャー予約プラットフォームなど、高トラフィックなサービスの信頼性向上を担ってきました。</p>
-        <p>SLI/SLO に基づく監視運用、Kubernetes クラスタの構築・アップグレード、Argo CD / Argo Rollouts によるプログレッシブデリバリー、Terraform を用いた IaC 推進、AWS コスト最適化（月額 20% 削減、アーキテクチャ改善で日額 80% 削減）などが主な専門領域です。</p>
+        <p>SRE / Platform Engineer として、AWS と OpenStack のマルチクラウド環境でのインフラ運用・改善に取り組んでいます。国内大規模 EC サービス（店舗数 約5万・流通総額 約2,000億円）や、レジャー予約プラットフォームなど、高トラフィックなサービスの信頼性向上を担ってきました。プライベートクラウド（OpenStack）ではメールサーバーや DNS サーバーの構成管理・運用も担当し、インフラ全般にわたる幅広い実務経験を持つ。</p>
+        <p>SLI/SLO に基づく監視運用、Kubernetes クラスタの構築・アップグレード、Argo CD / Argo Rollouts によるプログレッシブデリバリー、Terraform を用いた IaC 推進、AWS コスト最適化（月額 20% 削減、アーキテクチャ改善で日額 80% 削減）などが主な専門領域です。また、Gmail 送信者ガイドライン対応（OpenDKIM・OpenARC 導入による SPF / DKIM / DMARC 準拠）や CentOS EOL に伴う Ubuntu への VM 移行（OpenStack Octavia カナリアリリースによる無停止移行・Terraform + Puppet による構成管理）など、メールインフラ・VM 構成管理の実績も持ちます。</p>
         <p>新しい技術へのキャッチアップを大切にしており、学んだ知見をテックブログや登壇を通じて積極的にアウトプットしています。RDS ブルー/グリーンデプロイや NGINX レートリミットに関する記事は、それぞれ 60・40 件以上のはてなブックマークを獲得しました。AWS 認定資格は Solutions Architect Professional を含む 8 つを保有し、LPIC-3 まで取得しています。</p>
       </div>
       <div class="about-highlights">
@@ -1132,26 +1113,6 @@ window.addEventListener('scroll', () => {
   prevY = y;
 }, { passive: true });
 
-// ── Mobile nav ──
-const toggle = document.querySelector('.nav-toggle');
-const links = document.querySelector('.nav-links');
-const overlay = document.querySelector('.nav-overlay');
-if (toggle) {
-  toggle.addEventListener('click', () => {
-    links.classList.toggle('open');
-    overlay.classList.toggle('open');
-  });
-  overlay.addEventListener('click', () => {
-    links.classList.remove('open');
-    overlay.classList.remove('open');
-  });
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      links.classList.remove('open');
-      overlay.classList.remove('open');
-    });
-  });
-}
 </script>
 </body>
 </html>
