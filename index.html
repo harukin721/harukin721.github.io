@@ -55,9 +55,7 @@
       background: rgba(8, 8, 12, .78);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      transition: transform .35s cubic-bezier(.4, 0, .2, 1);
     }
-    .nav.hide { transform: translateY(-100%); }
     .nav-inner {
       max-width: 1100px; margin: 0 auto; padding: .85rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
@@ -293,6 +291,7 @@
     .cert-icon.linux { background: rgba(45,212,168,.12); color: var(--mint); }
     .cert-icon.ipa { background: rgba(124,106,239,.12); color: var(--accent); }
     .cert-icon.other { background: rgba(144,144,168,.1); color: var(--text-2); }
+    .cert-icon.k8s { background: rgba(50,108,229,.12); color: #326ce5; }
     .cert-link { text-decoration: none; color: var(--text); cursor: pointer; }
     .cert-link:hover { color: var(--text); }
     .cert-ext { font-size: .65rem; color: var(--text-3); align-self: center; transition: color .3s; }
@@ -494,9 +493,9 @@
     </div>
     <div class="about-card reveal">
       <div class="about-text">
-        <p>SRE / Platform Engineer として、AWS と OpenStack のマルチクラウド環境でのインフラ運用・改善に取り組んでいます。国内大規模 EC サービス（店舗数 約5万・流通総額 約2,000億円）や、レジャー予約プラットフォームなど、高トラフィックなサービスの信頼性向上を担ってきました。プライベートクラウド（OpenStack）ではメールサーバーや DNS サーバーの構成管理・運用も担当し、インフラ全般にわたる幅広い実務経験を持つ。</p>
-        <p>SLI/SLO に基づく監視運用、Kubernetes クラスタの構築・アップグレード、Argo CD / Argo Rollouts によるプログレッシブデリバリー、Terraform を用いた IaC 推進、AWS コスト最適化（月額 20% 削減、アーキテクチャ改善で日額 80% 削減）などが主な専門領域です。また、Gmail 送信者ガイドライン対応（OpenDKIM・OpenARC 導入による SPF / DKIM / DMARC 準拠）や CentOS EOL に伴う Ubuntu への VM 移行（OpenStack Octavia カナリアリリースによる無停止移行・Terraform + Puppet による構成管理）など、メールインフラ・VM 構成管理の実績も持ちます。</p>
-        <p>新しい技術へのキャッチアップを大切にしており、学んだ知見をテックブログや登壇を通じて積極的にアウトプットしています。RDS ブルー/グリーンデプロイや NGINX レートリミットに関する記事は、それぞれ 60・40 件以上のはてなブックマークを獲得しました。AWS 認定資格は Solutions Architect Professional を含む 8 つを保有し、LPIC-3 まで取得しています。</p>
+        <p>主に SRE / Platform Engineer として、2025年4月よりレジャー予約プラットフォーム「アソビュー!」(月間PV 3,800万・会員数1,800万人)の信頼性向上に取り組んでいます。それ以前は、2022年9月から2025年3月まで、国内大規模 EC サービス「カラーミーショップ」(店舗数約5万・流通総額約2,000億円)にて、AWS と OpenStack のマルチクラウド環境でのインフラ運用・改善を担当し、プライベートクラウド(OpenStack)ではメールサーバーや DNS サーバーの構成管理・運用も担っていました。また、副業では Software Engineer として SaaS プロダクトの開発にも携わり、TypeScript によるバックエンド・フロントエンド開発を行っています。</p>
+        <p>こうした業務を通じて、SLI/SLO に基づく監視運用、Kubernetes クラスタの構築・アップグレード、Argo CD / Argo Rollouts によるプログレッシブデリバリー、Terraform を用いた IaC 推進、AWS コスト最適化(月額20%削減、アーキテクチャ改善で日額80%削減)などを手がけてきました。加えて、Gmail 送信者ガイドライン対応(OpenDKIM・OpenARC 導入による SPF / DKIM / DMARC 準拠)や、CentOS EOL に伴う Ubuntu への VM 移行(OpenStack Octavia のカナリアリリースによる無停止移行、Terraform + Puppet による構成管理)など、メールインフラや VM 構成管理の実績もあります。</p>
+        <p>新しい技術へのキャッチアップを大切にしており、学んだ知見はテックブログや登壇を通じて積極的にアウトプットしています。RDS ブルー/グリーンデプロイや NGINX レートリミットに関する記事は、それぞれ60件・40件以上のはてなブックマークを獲得しました。AWS 認定資格は Solutions Architect Professional を含め8つを保有し、LPIC-3 まで取得しています。</p>
       </div>
       <div class="about-highlights">
         <div class="hl"><div class="hl-num">5+</div><div class="hl-label">Years of Experience</div></div>
@@ -527,7 +526,7 @@
         <div class="tl-body">
           <ul>
             <li>LLM オブザーバビリティプラットフォーム Langfuse v3 の AWS インフラを設計・構築</li>
-            <li>OCR プロダクトの既存システムに対するバグ修正・機能改善（チケット駆動開発）</li>
+            <li>OCR プロダクトの既存システムに対するバグ修正・機能改善</li>
           </ul>
           <div class="tl-tech">
             <span>AWS</span><span>ECS</span><span>Terraform</span><span>Terragrunt</span><span>ecspresso</span><span>ClickHouse</span><span>TypeScript</span><span>Python</span><span>MySQL</span>
@@ -858,7 +857,23 @@
       <div class="sec-line"></div>
     </div>
     <div class="certs-grid">
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/47f70262-b9e1-4c1a-8be5-0558e971220d" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon k8s"><i class="fa-solid fa-dharmachakra"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">KCNA: Kubernetes and Cloud Native Associate</p>
+          <p class="cert-date">2026.08</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/badges/8063125a-45dc-45ec-bc22-808452ed390a" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+        <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
+        <div class="cert-body">
+          <p class="cert-name">AWS Certified DevOps Engineer - Professional</p>
+          <p class="cert-date">2026.06</p>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
+      </a>
+      <a href="https://www.credly.com/badges/254fa23c-aa1e-4f55-9e20-86c0b6314a0d" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div class="cert-body">
           <p class="cert-name">AWS Solutions Architect - Professional</p>
@@ -866,7 +881,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/ab9f4f2b-4461-4411-9b85-d3f2ab716121" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon linux"><i class="fa-brands fa-linux"></i></div>
         <div class="cert-body">
           <p class="cert-name">LPIC-3 Virtualization and Containerization</p>
@@ -874,7 +889,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/7142c3fa-2586-4c97-8ecd-1dbd6e224685" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div class="cert-body">
           <p class="cert-name">AWS Data Engineer - Associate</p>
@@ -882,7 +897,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/62fe3fd5-1653-45f9-8756-4f3cdcce0f7a" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div class="cert-body">
           <p class="cert-name">AWS AI Practitioner</p>
@@ -904,7 +919,7 @@
           <p class="cert-date">2023.09</p>
         </div>
       </div>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/41e3a3b3-e58c-416a-a61d-0c42856a4839" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon linux"><i class="fa-brands fa-linux"></i></div>
         <div class="cert-body">
           <p class="cert-name">LPIC-2</p>
@@ -912,7 +927,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/27c3a36b-b209-4135-a2d2-2a58585eaa96" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div class="cert-body">
           <p class="cert-name">AWS SysOps Administrator - Associate</p>
@@ -920,7 +935,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/75427dac-0e8c-4004-8c1f-3cc5a3a53a33" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div class="cert-body">
           <p class="cert-name">AWS Developer - Associate</p>
@@ -928,7 +943,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/415ed8c5-55a9-4d0e-98d2-1917d3a9f2b1" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div class="cert-body">
           <p class="cert-name">AWS Solutions Architect - Associate</p>
@@ -936,7 +951,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/1752fe41-d8a7-4e70-9734-fff87885118f" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon linux"><i class="fa-brands fa-linux"></i></div>
         <div class="cert-body">
           <p class="cert-name">LPIC-1</p>
@@ -944,7 +959,7 @@
         </div>
         <i class="fa-solid fa-arrow-up-right-from-square cert-ext"></i>
       </a>
-      <a href="https://www.credly.com/users/harukin721" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
+      <a href="https://www.credly.com/badges/f4f75a19-0c5b-4698-9234-053d3d34374c" target="_blank" rel="noopener noreferrer" class="cert-card cert-link reveal">
         <div class="cert-icon aws"><i class="fa-brands fa-aws"></i></div>
         <div class="cert-body">
           <p class="cert-name">AWS Cloud Practitioner</p>
@@ -1123,16 +1138,6 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     container.innerHTML = '<p style="color:var(--text-3);font-size:.85rem">記事の取得に失敗しました。<a href="https://harukin721.hatenablog.com" target="_blank" rel="noopener noreferrer">はてなブログ</a>をご覧ください。</p>';
   }
 })();
-
-// ── Nav hide/show ──
-let prevY = 0;
-const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y > prevY && y > 100) nav.classList.add('hide');
-  else nav.classList.remove('hide');
-  prevY = y;
-}, { passive: true });
 
 </script>
 </body>
